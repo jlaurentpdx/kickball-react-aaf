@@ -3,11 +3,14 @@ import { Link } from 'react-router-dom';
 import Loading from '../../components/loading/Loading';
 import { getTeamById } from '../../services/teams';
 
-function Team({
-  match: {
-    params: { id },
+function Team(
+  {
+    match: {
+      params: { id },
+    },
   },
-}) {
+  { user }
+) {
   const [team, setTeam] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -29,9 +32,7 @@ function Team({
       <p>
         {team.city}, {team.state}
       </p>
-      <p>
-        <Link to={`/teams/${id}/edit`}>Edit Team</Link>
-      </p>
+      <p>{user && <Link to={`/teams/${id}/edit`}>Edit Team</Link>}</p>
     </>
   );
 }
